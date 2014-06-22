@@ -27,6 +27,7 @@ void random_stuff(void) /* print random junk on the screen for about 3 seconds *
   int maxx, maxy;
   int stop=time(0)+RANDOM_TIME;
   getmaxyx(stdscr, maxy, maxx);
+  clear();
   for(;time(0)<=stop;)
     {
       for(int x=0;x<maxx;++x)
@@ -70,7 +71,7 @@ void be_joshua()
       }
     else if(ret==ERR || strcmp(buf, "joshua"))
       {
-        print_string("IDENTIFICATION NOT RECOGNIZED BY SYSTEM\n--CONNECTION TERMINATED--");
+        print_string("\nIDENTIFICATION NOT RECOGNIZED BY SYSTEM\n--CONNECTION TERMINATED--");
         return;
       }
   } while(strcmp(buf, "joshua"));
