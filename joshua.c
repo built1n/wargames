@@ -1,8 +1,9 @@
 #include <joshua.h>
+#include <chatbot.h>
 #include <curses.h>
 #include <stdlib.h>
+#include <util.h>
 #define RANDOM_TIME 1
-#define SLEEP_TIME 50000
 void allLower(char* str)
 {
   for(int i=0;str[i];++i)
@@ -10,36 +11,15 @@ void allLower(char* str)
       str[i]=tolower(str[i]);
     }
 }
-void print_string(const char* str) /* print string, slowly */
-{
-  int i=0;
-  while(str[i])
-    {
-      addch(str[i]);
-      usleep(SLEEP_TIME);
-      beep();
-      refresh();
-      ++i;
-    }
-}
 void random_stuff(void) /* print random junk on the screen for about 3 seconds */
 {
-  int maxx, maxy;
-  int stop=time(0)+RANDOM_TIME;
-  getmaxyx(stdscr, maxy, maxx);
   clear();
-  for(;time(0)<=stop;)
-    {
-      for(int x=0;x<maxx;++x)
-        {
-          for(int y=0;y<maxy;++y)
-            {
-              mvaddch(y, x, (rand()%255)+1);
-              beep();
-            }
-        }
-      refresh();
-    }
+  /* credit for this text goes to David Brownlee and Chirs Carter */
+  print_string("#45 11456 11009 11893 11972 11315\nPRT CON. 3.4.5. SECTRAN 9.4.3. PORT STAT: SD-345\n\n(311) 699-7305\n");
+  clear();
+  print_string("\n\n\n\n\n\n\n");
+  print_string("(311) 767-8739\n(311) 936-2364\n- PRT. STAT. CRT. DEF.\n||||||||||||||==================================================\nFSKDJLSD: SDSDKJ: SBFJSL: DKSJL: SKFJJ: SDKFJLJ:\nSYSPROC FUNCT READY ALT NET READY\nCPU AUTH RY-345-AX3 SYSCOMP STATUS ALL PORTS ACTIVE\n22/34534.90/3209 11CVB-3904-3490\n(311) 935-2364\n");
+  usleep(500000);
   clear();
 }
 void be_joshua()
@@ -76,10 +56,12 @@ void be_joshua()
       }
   } while(strcmp(buf, "joshua"));
   random_stuff();
+  usleep(SLEEP_TIME*25);
   print_string("GREETINGS, PROFESSOR FALKEN.\n\n");
   refresh();
   getnstr(buf, 32); /* ignore this */
   print_string("\n\nHOW ARE YOU FEELING TODAY?\n\n");
   refresh();
+  do_chatbot();
   endwin();
 }
