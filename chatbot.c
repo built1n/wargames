@@ -73,7 +73,7 @@ void do_chatbot(void)
           if(!valid)
             {
               print_string("\n\n");
-              print_string("Sorry?");
+              print_string("SORRY?");
               print_string("\n\n");
             }
         } // else
