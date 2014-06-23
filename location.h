@@ -15,7 +15,8 @@ struct location_t world[]={
   {"winston-salem", 30, 7},
   {"san francisco", 1, 6},
   {"chicago", 24, 4},
- 
+  {"miami", 32, 11},
+  
   /* Soviet cities */
   /* NOTE: These are not neccessarily correct. I simply eyed them relative to Murmansk */
   {"murmansk", 74, 1},

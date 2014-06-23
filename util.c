@@ -1,4 +1,7 @@
 #include <util.h>
+#include <ctype.h>
+#include <unistd.h>
+#include <string.h>
 #include <curses.h>
 #include "strings.h"
 void allLower(char* str)

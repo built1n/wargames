@@ -3,6 +3,7 @@
 #include "strings.h"
 #include <games.h>
 #include <string.h>
+#include <unistd.h>
 void do_chatbot(void)
 {
   int stage=0; /* stage 0: i'm fine how are you... -> 

@@ -4,7 +4,8 @@
 #include <stdlib.h>
 #include <util.h>
 #include <signal.h>
-#define RANDOM_TIME 1
+#include <unistd.h>
+#include <string.h>
 void cleanup(int signum)
 {
   endwin();

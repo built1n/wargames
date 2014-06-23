@@ -3,6 +3,8 @@
 #include <map.h>
 #include <util.h>
 #include <location.h>
+#include <unistd.h>
+#include <string.h>
 void global_thermonuclear_war(void)
 {
   clear();
