@@ -4,13 +4,6 @@
 #include <stdlib.h>
 #include <util.h>
 #define RANDOM_TIME 1
-void allLower(char* str)
-{
-  for(int i=0;str[i];++i)
-    {
-      str[i]=tolower(str[i]);
-    }
-}
 void random_stuff(void) /* print random junk on the screen for about 3 seconds */
 {
   clear();
