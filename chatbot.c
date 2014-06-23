@@ -18,7 +18,7 @@ void do_chatbot(void)
       if(ret==ERR)
         {
           print_string("\n\n");
-          print_string("Sorry?");
+          print_string("SORRY?");
           print_string("\n\n");
         }
       else

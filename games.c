@@ -37,19 +37,17 @@ void global_thermonuclear_war(void)
           good=false;
         }
       else
-        ++num_targets;
+	{
+	  ++num_targets;
+	}
     }
   struct location_t targets[32];
   int num_targets_found=0;
-  print_string("point 1");
   for(int i=0;i<num_targets;++i)
     {
-      print_string("point 2");
       allLower(target_names[i]);
-      print_string("point 3");
       remove_punct(target_names[i]);
       bool found=false;
-      print_string("point 4");
       for(int j=0;j<sizeof(world)/sizeof(struct location_t);++j)
         {
           if(strcmp(world[j].name, target_names[i])==0)
@@ -59,7 +57,6 @@ void global_thermonuclear_war(void)
               found=true;
             }
         }
-      print_string("point 5");
       if(!found)
         {
           print_string("TARGET NOT FOUND: ");
@@ -71,8 +68,9 @@ void global_thermonuclear_war(void)
     {
       map[targets[i].y][targets[i].x]='X';
     }
+  usleep(SLEEP_TIME*100);
   clear();
-  for(int i=0;i<sizeof(map)/sizeof(const char*);++i)
+  for(int i=0;i<sizeof(map)/sizeof(char*);++i)
     {
       print_string(map[i]);
       print_string("\n");

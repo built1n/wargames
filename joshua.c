@@ -3,7 +3,13 @@
 #include <curses.h>
 #include <stdlib.h>
 #include <util.h>
+#include <signal.h>
 #define RANDOM_TIME 1
+void cleanup(int signum)
+{
+  endwin();
+  exit(0);
+}
 void random_stuff(void) /* print random junk on the screen for about 3 seconds */
 {
   clear();
@@ -19,6 +25,7 @@ void be_joshua()
 {
   initscr();
   clear();
+  signal(SIGINT, &cleanup);
   /*
   start_color();
   init_pair(1, COLOR_BLUE, COLOR_BLACK);

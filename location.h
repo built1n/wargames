@@ -1,7 +1,8 @@
 /* provide the GTNW with some geographical data to draw the missiles */
 struct location_t {
   const char* name;
-  int x, y; /* x,y-coords on the map */
+  int x;
+  int y; /* x,y-coords on the map */
 };
 struct location_t world[]={
   /* US cities */
@@ -13,7 +14,7 @@ struct location_t world[]={
   {"washington dc", 33, 6},
   {"winston-salem", 30, 7},
   {"san francisco", 1, 6},
-  {"chicago", 26, 4},
+  {"chicago", 24, 4},
  
   /* Soviet cities */
   /* NOTE: These are not neccessarily correct. I simply eyed them relative to Murmansk */
