@@ -6,6 +6,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <string.h>
+#include "strings.h"
 void cleanup(int signum)
 {
   endwin();
@@ -70,7 +71,19 @@ void be_joshua()
   usleep(SLEEP_TIME*100);
   print_string("GREETINGS, PROFESSOR FALKEN.\n\n");
   refresh();
-  getnstr(buf, 32); /* ignore this */
+  getnstr(buf, 32);
+  allLower(buf);
+  remove_punct(buf);
+  for(int i=0;i<sizeof(exit_triggers)/sizeof(const char*);++i)
+    {
+      if(strcmp(buf, exit_triggers[i])==0)
+	{
+	  print_string("\n\n");
+	  print_string(exit_responses[rand()%sizeof(exit_responses)/sizeof(const char*)]);
+	  print_string("\n--CONNECTION TERMINATED--");
+	  return;
+	}
+    }
   print_string("\n\nHOW ARE YOU FEELING TODAY?\n\n");
   refresh();
   do_chatbot();

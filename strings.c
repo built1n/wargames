@@ -29,6 +29,16 @@ const char* stage4_triggers[] = {
   "lets play global thermonuclear war",
   "global thermonuclear war is better"
 };
+const char* tictactoe_triggers[] = {
+  "lets play tic tac toe",
+  "lets play tic-tac-toe",
+  "lets play tictactoe",
+  "how about tic-tac-toe",
+  "how about tic tac toe",
+  "play tic-tac-toe",
+  "play tictactoe",
+  "play tic tac toe"
+};
 const char* exit_triggers[] = {
   "goodbye",
   "good-bye",
@@ -39,8 +49,8 @@ const char* exit_triggers[] = {
 };
 const char* exit_responses[] = {
   "GOODBYE.",
-  "BYE!",
-  "BYE-BYE!",
+  "BYE.",
+  "BYE-BYE.",
   "GOOD-BYE.",
 };
 const char punctuation_marks[] = {
