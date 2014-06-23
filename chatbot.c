@@ -3,19 +3,6 @@
 #include "strings.h"
 #include <games.h>
 #include <string.h>
-void remove_punct(char* buf)
-{
-  for(int i=0;buf[i];++i)
-    {
-      for(int j=0;j<sizeof(punctuation_marks)/sizeof(char);++j)
-        {
-          if(buf[i]==punctuation_marks[j])
-            {
-              memmove(&buf[i], &buf[i+1], strlen(buf)-i);
-            }
-        }
-    }
-}
 void do_chatbot(void)
 {
   int stage=0; /* stage 0: i'm fine how are you... -> 

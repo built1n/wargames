@@ -12,7 +12,7 @@ void random_stuff(void) /* print random junk on the screen for about 3 seconds *
   clear();
   print_string("\n\n\n\n\n\n\n");
   print_string("(311) 767-8739\n(311) 936-2364\n- PRT. STAT. CRT. DEF.\n||||||||||||||==================================================\nFSKDJLSD: SDSDKJ: SBFJSL: DKSJL: SKFJJ: SDKFJLJ:\nSYSPROC FUNCT READY ALT NET READY\nCPU AUTH RY-345-AX3 SYSCOMP STATUS ALL PORTS ACTIVE\n22/34534.90/3209 11CVB-3904-3490\n(311) 935-2364\n");
-  usleep(500000);
+  usleep(100000);
   clear();
 }
 void be_joshua()
@@ -23,9 +23,17 @@ void be_joshua()
   start_color();
   init_pair(1, COLOR_BLUE, COLOR_BLACK);
   attron(COLOR_PAIR(1));*/
+  bool gamesPhase=false;
   char buf[33];
+  int maxx, maxy;
+  getmaxyx(stdscr, maxy, maxx);
+  for(int i=0;i<maxx*2;++i)
+    {
+      print_string(" ");
+    }
   do {
-    print_string("LOGON: ");
+    if(!gamesPhase)
+      print_string("LOGON: ");
     refresh();
     int ret=getnstr(buf, 32);
     allLower(buf);
@@ -37,17 +45,18 @@ void be_joshua()
     else if(strcmp(buf, "help games")==0)
       {
         print_string("\n'GAMES' REFERS TO MODELS, SIMULATIONS AND GAMES\nWHICH HAVE TACTICAL AND STRATEGIC APPLICATIONS.\n\n\n");
+        gamesPhase=true;
       }
     else if(strcmp(buf, "list games")==0)
       {
         print_string("\nFALKEN'S MAZE\nBLACK JACK\nGIN RUMMY\nHEARTS\nBRIDGE\nCHECKERS\nCHESS\nPOKER\nFIGHTER COMBAT\nGUERRILLA ENGAGEMENT\nDESERT WARFARE\nAIR-TO-GROUND ACTIONS\nTHEATERWIDE TACTICAL WARFARE\nTHEATERWIDE BIOTOXIC AND CHEMICAL WARFARE\n\nGLOBAL THERMONUCLEAR WAR\n\n\n");
       }
-    else if(ret==ERR || strcmp(buf, "joshua"))
+    else if(ret==ERR || strcmp(buf, "joshua") && !gamesPhase)
       {
         print_string("\nIDENTIFICATION NOT RECOGNIZED BY SYSTEM\n--CONNECTION TERMINATED--");
         return;
       }
-  } while(strcmp(buf, "joshua"));
+  } while(strcmp(buf, "joshua") || gamesPhase);
   random_stuff();
   usleep(SLEEP_TIME*100);
   print_string("GREETINGS, PROFESSOR FALKEN.\n\n");
