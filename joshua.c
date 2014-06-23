@@ -31,6 +31,7 @@ void be_joshua()
   start_color();
   init_pair(1, COLOR_BLUE, COLOR_BLACK);
   attron(COLOR_PAIR(1));*/
+  scrollok(stdscr, true);
   bool gamesPhase=false;
   char buf[33];
   int maxx, maxy;

@@ -31,6 +31,8 @@ void global_thermonuclear_war(void)
   char target_names[32][129];
   good=true;
   int num_targets=0;
+  struct location_t targets[32];
+  int num_targets_found=0;
   for(int i=0;i<32 && good;++i)
     {
       getnstr(target_names[i], 128);
@@ -41,30 +43,41 @@ void global_thermonuclear_war(void)
       else
 	{
 	  ++num_targets;
+	  allLower(target_names[i]);
+	  remove_punct(target_names[i]);
+	  bool found=false;
+	  for(int j=0;j<sizeof(world)/sizeof(struct location_t);++j)
+	    {
+	      if(strcmp(world[j].name, target_names[i])==0)
+		{
+		  found=true;
+		  if(world[j].owner!=side)
+		    {
+		      targets[num_targets_found]=world[j];
+		      ++num_targets_found;
+		    }
+		  else
+		    {
+		      print_string("\n\nATTEMPTING TO FIRE AT OWN CITY.\nPLEASE CONFIRM (YES OR NO):  ");
+		      char response[17];
+		      getnstr(response, 16);
+		      allLower(response);
+		      remove_punct(response);
+		      if(strcmp(response, "yes")==0 || strcmp(response, "y")==0)
+			{
+			  targets[num_targets_found]=world[j];
+			  ++num_targets_found;
+			}
+		    }
+		}
+	    }
+	  if(!found)
+	    {
+	      print_string("TARGET NOT FOUND: ");
+	      print_string(target_names[i]);
+	      print_string("\n");
+	    }
 	}
-    }
-  struct location_t targets[32];
-  int num_targets_found=0;
-  for(int i=0;i<num_targets;++i)
-    {
-      allLower(target_names[i]);
-      remove_punct(target_names[i]);
-      bool found=false;
-      for(int j=0;j<sizeof(world)/sizeof(struct location_t);++j)
-        {
-          if(strcmp(world[j].name, target_names[i])==0)
-            {
-              targets[num_targets_found]=world[j];
-              ++num_targets_found;
-              found=true;
-            }
-        }
-      if(!found)
-        {
-          print_string("TARGET NOT FOUND: ");
-          print_string(target_names[i]);
-          print_string("\n");
-        }
     }
   for(int i=0;i<num_targets_found;++i)
     {

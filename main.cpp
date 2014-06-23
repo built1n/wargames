@@ -4,4 +4,5 @@ using namespace std;
 int main()
 { 
   be_joshua();
+  endwin();
 }

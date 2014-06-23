@@ -4,6 +4,7 @@
 #include <games.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 void do_chatbot(void)
 {
   int stage=0; /* stage 0: i'm fine how are you... -> 
@@ -39,6 +40,7 @@ void do_chatbot(void)
                      valid=true;
                    }
                 }
+	      break;
             case 1:
               for(int i=0;i<sizeof(stage2_triggers)/sizeof(const char*);++i)
                 {
@@ -49,6 +51,7 @@ void do_chatbot(void)
                      valid=true;
                     }
                 }
+	      break;
             case 2:
               for(int i=0;i<sizeof(stage3_triggers)/sizeof(const char*);++i)
                 {
@@ -59,6 +62,7 @@ void do_chatbot(void)
                      valid=true;
                     }
                 }
+	      break;
             case 3:
               for(int i=0;i<sizeof(stage4_triggers)/sizeof(const char*);++i)
                 {
@@ -70,7 +74,18 @@ void do_chatbot(void)
                       global_thermonuclear_war();
                     }
                 }
+	      break;
             } // switch
+	  for(int i=0;i<sizeof(exit_triggers)/sizeof(const char*);++i)
+	    {
+	      if(strcmp(buf, exit_triggers[i])==0)
+		{
+		  print_string("\n\n");
+		  print_string(exit_responses[rand()%sizeof(exit_responses)/sizeof(const char*)]);
+		  print_string("\n--CONNECTION TERMINATED--");
+		  return;
+		}
+	    }
           if(!valid)
             {
               print_string("\n\n");

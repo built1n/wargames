@@ -13,10 +13,19 @@ void allLower(char* str)
 }
 void print_string(const char* str) /* print string, slowly */
 {
+  int window_height;
+  int junk;
+  getmaxyx(stdscr, window_height, junk);
   int i=0;
   while(str[i])
     {
       addch(str[i]);
+      int cursx, cursy;
+      getyx(stdscr, cursy, cursx);
+      if(cursy==window_height)
+	{
+	  scroll(stdscr);
+	}
       usleep(SLEEP_TIME);
       refresh();
       ++i;

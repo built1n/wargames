@@ -2,6 +2,8 @@
 const char* stage1_triggers[] = {
   "im fine",
   "im fine how are you",
+  "i am fine",
+  "i am fine how are you",
   "how are you"
 };
 const char* stage2_triggers[] = {
@@ -23,8 +25,23 @@ const char* stage4_triggers[] = {
   "no lets play global thermonuclear war instead",
   "later lets play global thermonuclear war",
   "later lets play global thermonuclear war instead",
+  "later",
   "lets play global thermonuclear war",
   "global thermonuclear war is better"
+};
+const char* exit_triggers[] = {
+  "goodbye",
+  "good-bye",
+  "bye",
+  "bye-bye",
+  "see you later",
+  "logout"
+};
+const char* exit_responses[] = {
+  "GOODBYE.",
+  "BYE!",
+  "BYE-BYE!",
+  "GOOD-BYE.",
 };
 const char punctuation_marks[] = {
   '\'', '?', '.', '/', '`', '~', ',', '+', '!'
