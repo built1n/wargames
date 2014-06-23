@@ -29,7 +29,7 @@ void be_joshua()
     refresh();
     int ret=getnstr(buf, 32);
     allLower(buf);
-    usleep(SLEEP_TIME*25);
+    usleep(SLEEP_TIME*100);
     if(strcmp(buf, "help logon")==0)
       {
         print_string("\nHELP NOT AVAILABLE\n\n\n");
@@ -49,7 +49,7 @@ void be_joshua()
       }
   } while(strcmp(buf, "joshua"));
   random_stuff();
-  usleep(SLEEP_TIME*25);
+  usleep(SLEEP_TIME*100);
   print_string("GREETINGS, PROFESSOR FALKEN.\n\n");
   refresh();
   getnstr(buf, 32); /* ignore this */

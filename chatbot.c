@@ -27,6 +27,7 @@ void do_chatbot(void)
     {
       char buf[513];
       int ret=getnstr(buf, 512);
+      usleep(SLEEP_TIME*100);
       if(ret==ERR)
         {
           print_string("\n\n");
@@ -37,7 +38,7 @@ void do_chatbot(void)
         {
           allLower(buf);
           remove_punct(buf);
-          usleep(SLEEP_TIME*25);
+          bool valid=false;
           switch(stage)
             {
             case 0:
@@ -47,6 +48,7 @@ void do_chatbot(void)
                    {
                      print_string("\n\nEXCELLENT. IT'S BEEN A LONG TIME. CAN YOU EXPLAIN\nTHE REMOVAL OF YOUR USER ACCOUNT ON 6/23/73?\n\n");
                      ++stage;
+                     valid=true;
                    }
                 }
             case 1:
@@ -56,6 +58,7 @@ void do_chatbot(void)
                     {
                       print_string("\n\nYES THEY DO. SHALL WE PLAY A GAME?\n\n");
                       ++stage;
+                     valid=true;
                     }
                 }
             case 2:
@@ -65,6 +68,7 @@ void do_chatbot(void)
                     { 
                       print_string("\n\nWOULDN'T YOU PREFER A GOOD GAME OF CHESS?\n\n");
                       ++stage;
+                     valid=true;
                     }
                 }
             case 3:
@@ -73,11 +77,18 @@ void do_chatbot(void)
                   if(strcmp(buf, stage4_triggers[i])==0)
                     {
                       print_string("\n\nFINE.\n\n");
+                      valid=true;
                       usleep(SLEEP_TIME*100);
                       global_thermonuclear_war();
                     }
                 }
+            } // switch
+          if(!valid)
+            {
+              print_string("\n\n");
+              print_string("Sorry?");
+              print_string("\n\n");
             }
-        }
-    }
+        } // else
+    } // while
 }
