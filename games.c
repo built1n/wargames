@@ -29,7 +29,7 @@ static void print_map_with_pops(void)
 	us_pop+=world[i].population;
     }
   /* now sort into US and USSR cities */
-  struct location_t us_cities[sizeof(world)/sizeof(struct location_t)], ussr_cities[sizeof(world)/sizeof(struct location_t)];
+  struct location_t us_cities[sizeof(world)/sizeof(struct location_t)+1], ussr_cities[sizeof(world)/sizeof(struct location_t)+1];
   int us_back=0, ussr_back=0;
   for(int i=0;i<sizeof(world)/sizeof(struct location_t);++i)
     {
@@ -60,21 +60,29 @@ static void print_map_with_pops(void)
 	  ++ussr_back;
 	}
     }
+  us_cities[us_back].print=true;
+  us_cities[us_back].print_name="Total";
+  us_cities[us_back].population=us_pop;
+  ussr_cities[ussr_back].print=true;
+  ussr_cities[ussr_back].print_name="Total";
+  ussr_cities[ussr_back].population=ussr_pop;
+  ++us_back;
+  ++ussr_back;
   print_string("\n\n");
-  char buf[256];
+  char buf[512];
   for(int i=0;i<us_back;++i)
     {
       if(us_cities[i].print && ussr_cities[i].print)
 	{
-	  snprintf(buf, 255, "%s %*s", us_cities[i].name, 64-strlen(us_cities[i].name), ussr_cities[i].name);
+	  snprintf(buf, 512, "%s: %d %*s: %d", us_cities[i].print_name, us_cities[i].population, 64-strlen(us_cities[i].print_name), ussr_cities[i].print_name, ussr_cities[i].population);
 	}
       else if(us_cities[i].print && !ussr_cities[i].print)
-	snprintf(buf, 255, "%s", us_cities[i].name);
+	snprintf(buf, 512, "%s: %d", us_cities[i].print_name, us_cities[i].population);
       else
 	{
 	  memset(buf, ' ', 255);
 	  buf[255]=0;
-	  snprintf(buf+64, 255-64, "%s", ussr_cities[i].name);
+	  snprintf(buf+64, 512-64, "%s: %d", ussr_cities[i].print_name, ussr_cities[i].population);
 	}
       print_string(buf);
       print_string("\n");
