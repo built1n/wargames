@@ -76,14 +76,25 @@ void do_chatbot(void)
                 }
 	      break;
             } // switch
+	  /* now check for phase-insensitive strings */
 	  for(int i=0;i<sizeof(exit_triggers)/sizeof(const char*);++i)
 	    {
 	      if(strcmp(buf, exit_triggers[i])==0)
 		{
 		  print_string("\n\n");
-		  print_string(exit_responses[rand()%sizeof(exit_responses)/sizeof(const char*)]);
+		  print_string(exit_responses[rand()%(sizeof(exit_responses)/sizeof(const char*))]);
 		  print_string("\n--CONNECTION TERMINATED--");
 		  return;
+		}
+	    }
+	  for(int i=0;i<sizeof(greetings_triggers)/sizeof(const char*);++i)
+	    {
+	      if(strcmp(buf, greetings_triggers[i])==0)
+		{
+		  print_string("\n\n");
+		  print_string(greetings_responses[rand()%(sizeof(greetings_responses)/sizeof(const char*))]);
+		  print_string("\n\n");
+		  valid=true;
 		}
 	    }
           if(!valid)

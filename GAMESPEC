@@ -1,0 +1,44 @@
+This file contains a formal definition of Global Thermonuclear War.
+=======GAMEPLAY========
+Each player starts with 32 ICBMs.
+The player with population still remaining after the other has been wiped out is the winner.
+If both players are wiped out, it is a tie.
+Each turn, the player can either:
+     - Launch ICBMs
+     - Negociate peace terms
+     - Surrender
+
+The behavior of each of these options is described below.
+
+ICBM launch:
+     - The USA can launch ICBMs at a maximum of 4 cities at a time.
+     - The USSR can launch 6 at a time.
+     - When an ICBM is launched, there are 4 possible results:
+       - Miss:     0 casualties
+       - Marginal: 10000 casualties
+       - Major:    500000 casualties
+       - Critical: All inhabitants of the target city are killed
+     - The probabilities of each of these options is outlined below:
+       - Miss     - 10%
+       - Marginal - 50%
+       - Major    - 30%
+       - Critical - 10%
+     - After the turn, the cities targeted will have one of these symbols in it:
+       - Miss     - O
+       - Marginal - x
+       - Major    - *
+       - Critical - X
+
+Negociation:
+    - There are three possible outcomes:
+      - Peace/Progress  - 20%
+      - Surprise attack - 20%
+      - No progress     - 60%
+    - When progress is made, both sides will lose 4 ICBMs
+    - Progress must be made at least 5 times if peace is to be achieved
+
+Surrender:
+    - The other player wins
+
+=======GRAPHICS=======
+Each turn, a map is displayed with the populations of the player's cities in a table below.

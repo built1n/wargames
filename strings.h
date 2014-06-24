@@ -8,4 +8,6 @@ const char* tictactoe_triggers[8];
 const char punctuation_marks[9];
 const char* exit_triggers[6];
 const char* exit_responses[4];
+const char* greetings_triggers[8];
+const char* greetings_responses[5];
 #endif

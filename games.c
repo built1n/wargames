@@ -5,6 +5,81 @@
 #include <location.h>
 #include <unistd.h>
 #include <string.h>
+static int max(int a, int b)
+{
+  if(a>b)
+    return a;
+  else
+    return b;
+}
+static void print_map_with_pops(void)
+{
+  for(int i=0;i<sizeof(map)/sizeof(char*);++i)
+    {
+      print_string(map[i]);
+      print_string("\n");
+    }
+  unsigned int us_pop=0, ussr_pop=0;
+  /* calculate populations */
+  for(int i=0;i<sizeof(world)/sizeof(struct location_t);++i)
+    {
+      if(world[i].owner==USSR)
+	ussr_pop+=world[i].population;
+      else
+	us_pop+=world[i].population;
+    }
+  /* now sort into US and USSR cities */
+  struct location_t us_cities[sizeof(world)/sizeof(struct location_t)], ussr_cities[sizeof(world)/sizeof(struct location_t)];
+  int us_back=0, ussr_back=0;
+  for(int i=0;i<sizeof(world)/sizeof(struct location_t);++i)
+    {
+      if(world[i].owner==USSR)
+	{
+	  ussr_cities[ussr_back]=world[i];
+	  ++ussr_back;
+	}
+      else
+	{
+	  us_cities[us_back]=world[i];
+	  ++us_back;
+	}
+    }
+  if(us_back<ussr_back)
+    {
+      while(us_back!=ussr_back)
+	{
+	  us_cities[us_back].print=false;
+	  ++us_back;
+	}
+    }
+  else if(us_back>ussr_back)
+    {
+      while(us_back!=ussr_back)
+	{
+	  ussr_cities[ussr_back].print=false;
+	  ++ussr_back;
+	}
+    }
+  print_string("\n\n");
+  char buf[256];
+  for(int i=0;i<us_back;++i)
+    {
+      if(us_cities[i].print && ussr_cities[i].print)
+	{
+	  snprintf(buf, 255, "%s %*s", us_cities[i].name, 64-strlen(us_cities[i].name), ussr_cities[i].name);
+	}
+      else if(us_cities[i].print && !ussr_cities[i].print)
+	snprintf(buf, 255, "%s", us_cities[i].name);
+      else
+	{
+	  memset(buf, ' ', 255);
+	  buf[255]=0;
+	  snprintf(buf+64, 255-64, "%s", ussr_cities[i].name);
+	}
+      print_string(buf);
+      print_string("\n");
+    }
+}
 void global_thermonuclear_war(void)
 {
   clear();
@@ -93,10 +168,5 @@ void global_thermonuclear_war(void)
       map[targets[i].y][targets[i].x]='X';
     }
   clear();
-  for(int i=0;i<sizeof(map)/sizeof(char*);++i)
-    {
-      print_string(map[i]);
-      print_string("\n");
-    }
-  unsigned int us_pop=200000000, ussr_pop=250000000;
+  print_map_with_pops();
 }

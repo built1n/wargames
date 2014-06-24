@@ -53,6 +53,23 @@ const char* exit_responses[] = {
   "BYE-BYE.",
   "GOOD-BYE.",
 };
+const char* greetings_triggers[] = {
+  "hi", 
+  "hello", 
+  "hiya", 
+  "sup", 
+  "whats up", 
+  "how are you", 
+  "hey", 
+  "how are you doing"
+};
+const char* greetings_responses[] = {
+  "HELLO.",
+  "HI.",
+  "GREETINGS.",
+  "HELLO.",
+  "HELLO."
+};
 const char punctuation_marks[] = {
   '\'', '?', '.', '/', '`', '~', ',', '+', '!'
 };
