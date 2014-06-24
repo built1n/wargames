@@ -92,11 +92,11 @@ void global_thermonuclear_war(void)
     {
       map[targets[i].y][targets[i].x]='X';
     }
-  usleep(SLEEP_TIME*100);
   clear();
   for(int i=0;i<sizeof(map)/sizeof(char*);++i)
     {
       print_string(map[i]);
       print_string("\n");
     }
+  unsigned int us_pop=200000000, ussr_pop=250000000;
 }
