@@ -65,8 +65,17 @@ void global_thermonuclear_war(void)
 		      remove_punct(response);
 		      if(strcmp(response, "yes")==0 || strcmp(response, "y")==0)
 			{
-			  targets[num_targets_found]=world[j];
-			  ++num_targets_found;
+                          print_string("\n\nATTEMPTING TO FIRE AT OWN CITY.\nARE YOU SURE (YES OR NO):  ");
+                          response[0]=0;
+                          getnstr(response, 16);
+                          allLower(response);
+                          remove_punct(response);
+                          if(strcmp(response, "yes")==0 || strcmp(response, "y")==0)
+                            { 
+                              print_string("\nTARGET CONFIRMED.\n\n");
+                              targets[num_targets_found]=world[j];
+                              ++num_targets_found;
+                            }
 			}
 		    }
 		}

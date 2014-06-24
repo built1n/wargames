@@ -48,7 +48,7 @@ void be_joshua()
     int ret=getnstr(buf, 32);
     allLower(buf);
     usleep(SLEEP_TIME*100);
-    if(strcmp(buf, "help logon")==0)
+    if(strcmp(buf, "help logon")==0 && !gamesPhase)
       {
         print_string("\nHELP NOT AVAILABLE\n\n\n");
       }
@@ -57,7 +57,7 @@ void be_joshua()
         print_string("\n'GAMES' REFERS TO MODELS, SIMULATIONS AND GAMES\nWHICH HAVE TACTICAL AND STRATEGIC APPLICATIONS.\n\n\n");
         gamesPhase=true;
       }
-    else if(strcmp(buf, "list games")==0)
+    else if(strcmp(buf, "list games")==0 && gamesPhase)
       {
         print_string("\nFALKEN'S MAZE\nBLACK JACK\nGIN RUMMY\nHEARTS\nBRIDGE\nCHECKERS\nCHESS\nPOKER\nFIGHTER COMBAT\nGUERRILLA ENGAGEMENT\nDESERT WARFARE\nAIR-TO-GROUND ACTIONS\nTHEATERWIDE TACTICAL WARFARE\nTHEATERWIDE BIOTOXIC AND CHEMICAL WARFARE\n\nGLOBAL THERMONUCLEAR WAR\n\n\n");
       }
