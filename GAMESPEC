@@ -13,21 +13,24 @@ The behavior of each of these options is described below.
 ICBM launch:
      - The USA can launch ICBMs at a maximum of 4 cities at a time.
      - The USSR can launch 6 at a time.
-     - When an ICBM is launched, there are 4 possible results:
+     - When an ICBM is launched, there are 5 possible results:
        - Miss:     0 casualties
        - Marginal: 10000 casualties
+       - Minor:    100000 casualties
        - Major:    500000 casualties
        - Critical: All inhabitants of the target city are killed
      - The probabilities of each of these options is outlined below:
        - Miss     - 10%
-       - Marginal - 50%
+       - Marginal - 20%
+       - Minor    - 30%
        - Major    - 30%
        - Critical - 10%
      - After the turn, the cities targeted will have one of these symbols in it:
        - Miss     - O
        - Marginal - x
-       - Major    - *
-       - Critical - X
+       - Minor    - *
+       - Major    - X
+       - Critical - !
 
 Negociation:
     - There are three possible outcomes:

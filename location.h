@@ -4,7 +4,7 @@ struct location_t {
   const char* name;
   int x;
   int y; /* x,y-coords on the map */
-  int population; /* around 1980 */
+  unsigned int population; /* around 1980 */
   enum player_t owner;
   bool print;
   const char* print_name;

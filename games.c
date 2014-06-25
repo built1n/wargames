@@ -5,12 +5,38 @@
 #include <location.h>
 #include <unistd.h>
 #include <string.h>
-static int max(int a, int b)
+static unsigned int min(unsigned int a, unsigned int b)
 {
-  if(a>b)
-    return a;
+  return a<b?a:b;
+}
+static void fire_missile(struct location_t* city)
+{
+  int random=rand()%100;
+  int x=city->x, y=city->y;
+  if(random>=90) /* crit */
+    {
+      map[y][x]='!';
+      city->population=0;
+    }
+  else if(random>=60) /* major */
+    {
+      map[y][x]='X';
+      city->population=min(city->population-500000, 0);
+    }
+  else if(random>=30) /* minor */
+    {
+      map[y][x]='*';
+      city->population=min(city->population-100000, 0);
+    }
+  else if(random>=10) /* marginal */
+    {
+      map[y][x]='x';
+      city->population=min(city->population-10000, 0);
+    }
   else
-    return b;
+    {
+      map[y][x]='O';
+    }
 }
 static void print_map_with_pops(void)
 {
@@ -74,15 +100,17 @@ static void print_map_with_pops(void)
     {
       if(us_cities[i].print && ussr_cities[i].print)
 	{
-	  snprintf(buf, 512, "%s: %d %*s: %d", us_cities[i].print_name, us_cities[i].population, 64-strlen(us_cities[i].print_name), ussr_cities[i].print_name, ussr_cities[i].population);
+          char buf_2[32];
+          snprintf(buf_2, 31, "%u", us_cities[i].population);
+	  snprintf(buf, 512, "%s: %u %*s: %u", us_cities[i].print_name, us_cities[i].population, 64-strlen(us_cities[i].print_name)-strlen(buf_2), ussr_cities[i].print_name, ussr_cities[i].population);
 	}
       else if(us_cities[i].print && !ussr_cities[i].print)
-	snprintf(buf, 512, "%s: %d", us_cities[i].print_name, us_cities[i].population);
+	snprintf(buf, 512, "%s: %u", us_cities[i].print_name, us_cities[i].population);
       else
 	{
 	  memset(buf, ' ', 255);
 	  buf[255]=0;
-	  snprintf(buf+64, 512-64, "%s: %d", ussr_cities[i].print_name, ussr_cities[i].population);
+	  snprintf(buf+64, 512-64, "%s: %u", ussr_cities[i].print_name, ussr_cities[i].population);
 	}
       print_string(buf);
       print_string("\n");
@@ -114,9 +142,10 @@ void global_thermonuclear_war(void)
   char target_names[32][129];
   good=true;
   int num_targets=0;
-  struct location_t targets[32];
+  struct location_t *targets[32];
   int num_targets_found=0;
-  for(int i=0;i<32 && good;++i)
+  int max_targets=side==USA?4:5;
+  for(int i=0;i<max_targets && good;++i)
     {
       getnstr(target_names[i], 128);
       if(strcmp(target_names[i],"")==0)
@@ -136,7 +165,7 @@ void global_thermonuclear_war(void)
 		  found=true;
 		  if(world[j].owner!=side)
 		    {
-		      targets[num_targets_found]=world[j];
+		      targets[num_targets_found]=&world[j];
 		      ++num_targets_found;
 		    }
 		  else
@@ -156,7 +185,7 @@ void global_thermonuclear_war(void)
                           if(strcmp(response, "yes")==0 || strcmp(response, "y")==0)
                             { 
                               print_string("\nTARGET CONFIRMED.\n\n");
-                              targets[num_targets_found]=world[j];
+                              targets[num_targets_found]=&world[j];
                               ++num_targets_found;
                             }
 			}
@@ -173,7 +202,7 @@ void global_thermonuclear_war(void)
     }
   for(int i=0;i<num_targets_found;++i)
     {
-      map[targets[i].y][targets[i].x]='X';
+      fire_missile(targets[i]);
     }
   clear();
   print_map_with_pops();
