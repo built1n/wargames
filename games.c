@@ -5,11 +5,12 @@
 #include <location.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 static bool surrender=false;
 static int winner=0; /* on surrender */
-static unsigned int min(unsigned int a, unsigned int b)
+static unsigned int max(long long a, long long b)
 {
-  return a<b?a:b;
+  return a>b?a:b;
 }
 static void fire_missile(struct location_t* city)
 {
@@ -23,24 +24,24 @@ static void fire_missile(struct location_t* city)
   else if(random>=60) /* major */
     {
       map[y][x]='X';
-      city->population=min(city->population-500000, 0);
+      city->population=max((double)city->population*(double).4-400, 0);
     }
   else if(random>=30) /* minor */
     {
       map[y][x]='*';
-      city->population=min(city->population-100000, 0);
+      city->population=max((double)city->population*(double).6-200, 0);
     }
   else if(random>=10) /* marginal */
     {
       map[y][x]='x';
-      city->population=min(city->population-10000, 0);
+      city->population=max((double)city->population*(double).8-100, 0);
     }
   else
     {
       map[y][x]='O';
     }
 }
-static void calc_pops(unsigned int* us_pop, unsigned int* ussr_pop)
+static void calc_pops(long long* us_pop, long long* ussr_pop)
 { 
   *us_pop=0;
   *ussr_pop=0;
@@ -60,7 +61,7 @@ static void print_map_with_pops(void)
       print_string(map[i]);
       print_string("\n");
     }
-  unsigned int us_pop=0, ussr_pop=0;
+  long long us_pop=0, ussr_pop=0;
   calc_pops(&us_pop, &ussr_pop);
   /* now sort into US and USSR cities */
   struct location_t us_cities[sizeof(world)/sizeof(struct location_t)+1], ussr_cities[sizeof(world)/sizeof(struct location_t)+1];
@@ -136,7 +137,7 @@ static void do_first_strike(int side)
   struct location_t *targets[32];
   int num_targets_found=0;
   int max_targets=side==USA?4:6;
-  for(int i=0;i<max_targets && good;++i)
+  for(int i=0;num_targets_found<max_targets && good;++i)
     {
       getnstr(target_names[i], 128);
       if(strcmp(target_names[i],"")==0)
@@ -200,6 +201,7 @@ static void do_first_strike(int side)
 }
 static void do_missile_launch(int side)
 {
+  clear();
   attr_on(WA_UNDERLINE, 0);
   print_string("AWAITING STRIKE COMMAND");
   attr_off(WA_UNDERLINE, 0);
@@ -210,7 +212,7 @@ static void do_missile_launch(int side)
   struct location_t *targets[32];
   int num_targets_found=0;
   int max_targets=side==USA?4:6;
-  for(int i=0;i<max_targets && good;++i)
+  for(int i=0;num_targets_found<max_targets && good;++i)
     {
       getnstr(target_names[i], 128);
       if(strcmp(target_names[i],"")==0)
@@ -281,13 +283,13 @@ static void do_peace_talks(int side)
 static void do_human_move(int side)
 {
   bool good=false;
-  print_string("WHAT ACTION DO YOU WISH TO TAKE?\n\n  1. MISSILE LAUNCH\n  2. PEACE TALKS\n  3. SURRENDER\n\n");
+  print_string("\nWHAT ACTION DO YOU WISH TO TAKE?\n\n  1. MISSILE LAUNCH\n  2. PEACE TALKS\n  3. SURRENDER\n  4. NOTHING\n\n");
   int move=0;
   while(!good)
     {
       print_string("PLEASE CHOOSE ONE:  ");
       scanw("%u", &move);
-      if(move==1 || move==2 || move==3)
+      if(move>0 && move<5)
         good=true;
     }
   switch(move)
@@ -302,11 +304,14 @@ static void do_human_move(int side)
       surrender=true;
       winner=side==1?2:1;
       break;
+    case 4:
+      break;
     }
 }
 
 void global_thermonuclear_war(void)
 {
+  srand(time(0));
   surrender=false;
   clear();
   for(int i=0;i<sizeof(map)/sizeof(const char*);++i)
@@ -326,7 +331,7 @@ void global_thermonuclear_war(void)
     }
   clear();
   do_first_strike(side);
-  unsigned int us_pop=0, ussr_pop;
+  long long us_pop=0, ussr_pop;
   calc_pops(&us_pop, &ussr_pop);
   while(us_pop!=0 && ussr_pop!=0 && !surrender)
     {
@@ -335,7 +340,7 @@ void global_thermonuclear_war(void)
       do_ai_move(side);
       calc_pops(&us_pop, &ussr_pop);
     }
-  clear();
+  print_string("\n\n");
   if(!surrender)
     {
       if(us_pop==0 && ussr_pop==0)
