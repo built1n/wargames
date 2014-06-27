@@ -274,8 +274,14 @@ static void do_missile_launch(int side)
   clear();
   print_map_with_pops();
 }
+enum ai_strategy_t { AGGRESSIVE, PASSIVE, PEACEFUL };
+static void init_ai(int side)
+{
+  
+}
 static void do_ai_move(int side)
 {
+  
 }
 static void do_peace_talks(int side)
 {
@@ -333,12 +339,16 @@ void global_thermonuclear_war(void)
   do_first_strike(side);
   long long us_pop=0, ussr_pop;
   calc_pops(&us_pop, &ussr_pop);
+  init_ai(side);
   while(us_pop!=0 && ussr_pop!=0 && !surrender)
     {
       do_human_move(side);
       calc_pops(&us_pop, &ussr_pop);
-      do_ai_move(side);
-      calc_pops(&us_pop, &ussr_pop);
+      if(us_pop!=0 && ussr_pop!=0 && !surrender)
+        {
+          do_ai_move(side);
+          calc_pops(&us_pop, &ussr_pop);
+        }
     }
   print_string("\n\n");
   if(!surrender)
