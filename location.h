@@ -1,4 +1,5 @@
-/* provide the GTNW with some geographical data to draw the missiles */
+#include <stdbool.h>
+/* provide the GTNW with some geographical data to draw the missiles with */
 enum player_t { USA=1, USSR };
 struct location_t {
   const char* name;

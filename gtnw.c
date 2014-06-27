@@ -5,6 +5,7 @@
 #include <curses.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <unistd.h>
 static bool surrender=false;
 static int winner=0; /* on surrender */
