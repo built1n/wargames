@@ -1,11 +1,11 @@
 #include "gtnw.h"
 #include "strings.h"
 #include "util.h"
-
 #include <curses.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
 void do_chatbot(void)
 {
   int stage=0; /* stage 0: i'm fine how are you... -> 
@@ -107,3 +107,4 @@ void do_chatbot(void)
         } // else
     } // while
 }
+

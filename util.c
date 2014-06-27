@@ -1,10 +1,10 @@
 #include "strings.h"
 #include "util.h"
-
 #include <ctype.h>
 #include <curses.h>
 #include <string.h>
 #include <unistd.h>
+
 
 void allLower(char* str)
 {
@@ -46,3 +46,4 @@ void remove_punct(char* buf)
         }
     }
 }
+

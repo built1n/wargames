@@ -2,12 +2,12 @@
 #include "joshua.h"
 #include "strings.h" /* predefined strings */
 #include "util.h"
-
 #include <curses.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
 void cleanup(int signum)
 {
   endwin();
@@ -90,3 +90,4 @@ void be_joshua()
   do_chatbot();
   endwin();
 }
+

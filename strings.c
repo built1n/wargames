@@ -74,3 +74,4 @@ const char* greetings_responses[] = {
 const char punctuation_marks[] = {
   '\'', '?', '.', '/', '`', '~', ',', '+', '!'
 };
+
