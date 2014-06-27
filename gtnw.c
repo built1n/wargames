@@ -13,9 +13,10 @@ static unsigned int max(long long a, long long b)
 {
   return a>b?a:b;
 }
+/* simulate a missile launch */
 static void fire_missile(struct location_t* city)
 {
-  int random=rand()%100;
+  int random=rand()%100; /* leave this at 100 for future adjustments */
   int x=city->x, y=city->y;
   if(random>=90) /* crit */
     {
@@ -37,11 +38,13 @@ static void fire_missile(struct location_t* city)
       map[y][x]='x';
       city->population=max((double)city->population*(double).8-100, 0);
     }
-  else
+  else /* miss */
     {
       map[y][x]='O';
     }
 }
+
+/* calculate populations of US+USSR by totaling the populations of each of their cities */
 static void calc_pops(long long* us_pop, long long* ussr_pop)
 { 
   *us_pop=0;
@@ -55,6 +58,8 @@ static void calc_pops(long long* us_pop, long long* ussr_pop)
 	*us_pop+=world[i].population;
     }
 }
+
+/* print the map and populations of the cities underneath */
 static void print_map_with_pops(void)
 {
   for(int i=0;i<sizeof(map)/sizeof(char*);++i)
@@ -126,6 +131,8 @@ static void print_map_with_pops(void)
       print_string("\n");
     }
 }
+
+/* prompt the user for targets for the initial strike */
 static void do_first_strike(int side)
 {
   attr_on(WA_UNDERLINE, 0);
@@ -200,6 +207,9 @@ static void do_first_strike(int side)
   clear();
   print_map_with_pops();
 }
+
+/* essentially the same as do_first_strike */
+/** TODO: refactor into do_first_strike (or vice-versa) **/
 static void do_missile_launch(int side)
 {
   clear();
@@ -278,15 +288,19 @@ static void do_missile_launch(int side)
 enum ai_strategy_t { AGGRESSIVE, PASSIVE, PEACEFUL };
 static void init_ai(int side)
 {
-  
+  /* nothing for now */
+  /** TODO: decide strategy? **/
 }
 static void do_ai_move(int side)
 {
-  
+  /* nothing yet :( */
 }
 static void do_peace_talks(int side)
 {
+  /** TODO: IMPLEMENT!!! **/
 }
+
+/* prompt the player for their move */
 static void do_human_move(int side)
 {
   bool good=false;
@@ -316,6 +330,7 @@ static void do_human_move(int side)
     }
 }
 
+/* play a game of Global Thermonuclear War! */
 void global_thermonuclear_war(void)
 {
   srand(time(0));
