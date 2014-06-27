@@ -1,5 +1,5 @@
-SOURCES=joshua.o main.o util.o chatbot.o games.o strings.o
-HEADERS=chatbot.h games.h joshua.h location.h strings.h map.h util.h
+SOURCES=joshua.o main.o util.o chatbot.o gtnw.o strings.o
+HEADERS=chatbot.h gtnw.h joshua.h location.h strings.h map.h util.h
 CXXFLAGS=-I. -lncurses -g -O3
 CFLAGS=-I. -std=gnu99 -g -O3
 wargames: $(SOURCES) $(HEADERS)

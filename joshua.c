@@ -1,12 +1,13 @@
-#include <joshua.h>
-#include <chatbot.h>
+#include "chatbot.h"
+#include "joshua.h"
+#include "strings.h" /* predefined strings */
+#include "util.h"
+
 #include <curses.h>
-#include <stdlib.h>
-#include <util.h>
 #include <signal.h>
-#include <unistd.h>
+#include <stdlib.h>
 #include <string.h>
-#include "strings.h"
+#include <unistd.h>
 void cleanup(int signum)
 {
   endwin();

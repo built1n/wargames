@@ -1,11 +1,11 @@
-#include <games.h>
+#include "gtnw.h"
+#include "location.h"
+#include "map.h"
+#include "util.h"
 #include <curses.h>
-#include <map.h>
-#include <util.h>
-#include <location.h>
-#include <unistd.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 static bool surrender=false;
 static int winner=0; /* on surrender */
 static unsigned int max(long long a, long long b)
@@ -379,3 +379,4 @@ void global_thermonuclear_war(void)
         }
     }
 }
+

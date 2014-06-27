@@ -1,9 +1,11 @@
-#include <util.h>
-#include <ctype.h>
-#include <unistd.h>
-#include <string.h>
-#include <curses.h>
 #include "strings.h"
+#include "util.h"
+
+#include <ctype.h>
+#include <curses.h>
+#include <string.h>
+#include <unistd.h>
+
 void allLower(char* str)
 {
   for(int i=0;str[i];++i)

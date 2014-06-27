@@ -1,4 +1,5 @@
 #include "strings.h"
+
 const char* stage1_triggers[] = {
   "im fine",
   "im fine how are you",
