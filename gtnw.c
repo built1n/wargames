@@ -1,3 +1,23 @@
+/*
+ *   WarGames - a WOPR emulator written in C
+ *   Copyright (C) 2014 Franklin Wei
+ *
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *   
+ *   Contact the author at contact@fwei.tk
+ */
+
 #include "gtnw.h"
 #include "location.h"
 #include "map.h"
@@ -7,12 +27,15 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+
 static bool surrender=false;
 static int winner=0; /* on surrender */
+
 static unsigned int max(long long a, long long b)
 {
   return a>b?a:b;
 }
+
 /* simulate a missile launch */
 static void fire_missile(struct location_t* city)
 {
@@ -395,5 +418,3 @@ void global_thermonuclear_war(void)
         }
     }
 }
-
-
