@@ -49,17 +49,17 @@ static void fire_missile(struct location_t* city)
   else if(random>=60) /* major */
     {
       map[y][x]='X';
-      city->population=max((double)city->population*(double).4-400, 0);
+      city->population=max((double)city->population*(double).4-5000, 0);
     }
   else if(random>=30) /* minor */
     {
       map[y][x]='*';
-      city->population=max((double)city->population*(double).6-200, 0);
+      city->population=max((double)city->population*(double).6-2500, 0);
     }
   else if(random>=10) /* marginal */
     {
       map[y][x]='x';
-      city->population=max((double)city->population*(double).8-100, 0);
+      city->population=max((double)city->population*(double).8-1000, 0);
     }
   else /* miss */
     {
@@ -235,7 +235,7 @@ static void do_first_strike(int side)
 /** TODO: refactor into do_first_strike (or vice-versa) **/
 static void do_missile_launch(int side)
 {
-  clear();
+  print_string("\n\n");
   attr_on(WA_UNDERLINE, 0);
   print_string("AWAITING STRIKE COMMAND");
   attr_off(WA_UNDERLINE, 0);
@@ -356,14 +356,21 @@ static void do_human_move(int side)
 /* play a game of Global Thermonuclear War! */
 void global_thermonuclear_war(void)
 {
-  srand(time(0));
+  srand(time(0)); // might want to move to main()...
   surrender=false;
   clear();
+  for(int i=0;i<sizeof(const_map)/sizeof(const char*);++i)
+    {
+      strcpy(map[i], const_map[i]);
+    }
+  /* print the map */
   for(int i=0;i<sizeof(map)/sizeof(const char*);++i)
     {
       print_string(map[i]);
       print_string("\n");
     }
+  
+  /* get the side the user wants to be on */
   print_string("\nWHICH SIDE DO YOU WANT?\n\n  1.  UNITED STATES\n  2.  SOVIET UNION\n\n");
   bool good=false;
   unsigned int side=0;

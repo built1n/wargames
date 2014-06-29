@@ -15,9 +15,9 @@ ICBM launch:
      - The USSR can launch 6 at a time.
      - When an ICBM is launched, there are 5 possible results:
        - Miss:     0 casualties
-       - Marginal: 20%+100 casualties
-       - Minor:    40%+200 casualties
-       - Major:    60%+400 casualties
+       - Marginal: 20%+1000 casualties
+       - Minor:    40%+2500 casualties
+       - Major:    60%+5000 casualties
        - Critical: 100% casualties
      - The probabilities of each of these options is outlined below:
        - Miss     - 10%

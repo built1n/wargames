@@ -18,7 +18,7 @@
  *   Contact the author at contact@fwei.tk
  */
 
-#define SLEEP_TIME 0
+#define SLEEP_TIME 5000
 void allLower(char*);
 void print_string(const char*);
 void remove_punct(char*);
